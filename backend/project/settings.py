@@ -17,6 +17,14 @@ DEBUG = env.bool('DEBUG')
 
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
+# database
+DB_ENGINE = env('ENGINE')
+DB_NAME = env('NAME')
+DB_USER = env('USER')
+DB_PASSWORD = env('PASSWORD')
+DB_HOST = env('HOST')
+DB_PORT = env('PORT')
+
 # <------------------ App Settings ------------------>
 
 INSTALLED_APPS = [
@@ -74,8 +82,12 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': DB_ENGINE,
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
+        'PORT': DB_PORT,
     }
 }
 
