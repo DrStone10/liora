@@ -2,5 +2,5 @@
 
 - ~~Django setup~~
 - ~~React setup~~
-- Improving frontend design... (in progress)
+- ~~Improving frontend design~~
 - Improving backend API endpoints... (in progress)
