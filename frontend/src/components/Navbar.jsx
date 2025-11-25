@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar({ user, setUser }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -15,17 +15,41 @@ export default function Navbar() {
 
         {/* Desktop links */}
         <ul className="hidden md:flex items-center gap-6 text-gray-700 font-medium">
-          <li><Link to="/" className="hover:text-blue-600 transition">Home</Link></li>
-          <li><Link to="/login" className="hover:text-blue-600 transition">Login</Link></li>
-          <li><Link to="/register" className="hover:text-blue-600 transition">Register</Link></li>
-          <li>
-            <Link
-              to="/account"
-              className="px-4 py-1.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition shadow-sm"
-            >
-              Account
-            </Link>
-          </li>
+          {!user && (
+            <>
+              <li>
+                <Link to="/login" className="hover:text-blue-600 transition">
+                  Login
+                </Link>
+              </li>
+              <li>
+                <Link to="/register" className="hover:text-blue-600 transition">
+                  Register
+                </Link>
+              </li>
+            </>
+          )}
+
+          {user && (
+            <>
+              <li>
+                <Link
+                  to="/account"
+                  className="px-4 py-1.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition shadow-sm"
+                >
+                  Account
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/logout"
+                  className="px-4 py-1.5 bg-red-500 text-white rounded-lg hover:bg-red-600 transition shadow-sm"
+                >
+                  Logout
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
 
         {/* Hamburger button (mobile) */}
@@ -55,42 +79,51 @@ export default function Navbar() {
       {open && (
         <div className="md:hidden bg-white border-t border-gray-200 shadow-sm">
           <ul className="flex flex-col px-4 py-4 gap-4 text-gray-700 font-medium">
-            <li>
-              <Link 
-                to="/" 
-                className="hover:text-blue-600 transition"
-                onClick={() => setOpen(false)}
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link 
-                to="/login" 
-                className="hover:text-blue-600 transition"
-                onClick={() => setOpen(false)}
-              >
-                Login
-              </Link>
-            </li>
-            <li>
-              <Link 
-                to="/register" 
-                className="hover:text-blue-600 transition"
-                onClick={() => setOpen(false)}
-              >
-                Register
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/account"
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition shadow-sm text-center"
-                onClick={() => setOpen(false)}
-              >
-                Account
-              </Link>
-            </li>
+            {!user && (
+              <>
+                <li>
+                  <Link
+                    to="/login"
+                    className="hover:text-blue-600 transition"
+                    onClick={() => setOpen(false)}
+                  >
+                    Login
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/register"
+                    className="hover:text-blue-600 transition"
+                    onClick={() => setOpen(false)}
+                  >
+                    Register
+                  </Link>
+                </li>
+              </>
+            )}
+
+            {user && (
+              <>
+                <li>
+                  <Link
+                    to="/account"
+                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition shadow-sm text-center"
+                    onClick={() => setOpen(false)}
+                  >
+                    Account
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/logout"
+                    className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition shadow-sm text-center"
+                    onClick={() => setOpen(false)}
+                  >
+                    Logout
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       )}
