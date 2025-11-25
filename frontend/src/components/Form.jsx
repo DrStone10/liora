@@ -2,7 +2,6 @@ import { useState } from "react";
 import api from "../api";
 import { useNavigate } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
-import "../styles/Form.css"
 import LoadingIndicator from "./LoadingIndicator";
 
 function Form({ route, method }) {
@@ -34,28 +33,45 @@ function Form({ route, method }) {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="form-container">
-            <h1>{name}</h1>
-            <input
-                className="form-input"
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder="Username"
-            />
-            <input
-                className="form-input"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Password"
-            />
-            {loading && <LoadingIndicator />}
-            <button className="form-button" type="submit">
-                {name}
-            </button>
-        </form>
+    <form 
+        onSubmit={handleSubmit} 
+        className="w-full max-w-sm mx-auto mt-10 p-6 bg-white shadow-lg rounded-xl flex flex-col gap-4"
+    >
+        <h1 className="text-2xl font-semibold text-center text-gray-800">
+        {name}
+        </h1>
+
+        <input
+        className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+        type="text"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        placeholder="Username"
+        />
+
+        <input
+        className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
+        />
+
+        {loading && (
+        <div className="flex justify-center">
+            <LoadingIndicator />
+        </div>
+        )}
+
+        <button
+        className="w-full mt-2 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition shadow"
+        type="submit"
+        >
+        {name}
+        </button>
+    </form>
     );
+
 }
 
 export default Form
